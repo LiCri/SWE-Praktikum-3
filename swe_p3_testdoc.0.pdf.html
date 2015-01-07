@@ -239,5 +239,16 @@ Testdokumentation<br/>SWE-Praktikum<br/>WS 2014/2015
 swe_p3_testdoc.0.md<br/>rev. 0 / 07.01.2015<br/><span class="tr-page"></span>
 </p> 
 <h1 id="testdokumentation-für-aqwsqm.py"><span class="header-section-number">1</span> Testdokumentation für aqwsqm.py</h1>
+<h2 id="kontrollflussgraph-für-die-methode-generate_pxself-queryvars_dpl-der-klasse-updatestatement_cl"><span class="header-section-number">1.1</span> Kontrollflussgraph für die Methode Generate_px(self, QueryVars_dpl) der Klasse UpdateStatement_cl</h2>
+<div class="figure">
+<img src="diagram.jpg" alt="Kontrollflussgraph" /><p class="caption">Kontrollflussgraph</p>
+</div>
+<h2 id="testfälle-und-dokumentation"><span class="header-section-number">1.2</span> Testfälle und Dokumentation</h2>
+<p>==================== Testcase: OID nicht gesetzt ==================== Output: 2</p>
+<p>==================== Testcase: OID ist gesetzt ==================== Output: 1 3 5 6 9 10 3 4 7 3 4 7 3 4 7 3 4 7 3 4 7 3 4 6 9 10 3 4 7</p>
+<p>==================== Testcase: for-Schleife wird nicht betreten ==================== Output: 1 14</p>
+<p>==================== Testcase: Formatierungsparameter ist none ==================== Output: 1 3 5 6 8 3 4 7 3 4 7 3 4 7 3 4 7 3 4 7 3 4 6 9 10 3 4 7</p>
+<p>==================== Testcase: Datentyp ist nicht String ==================== Output: 1 3 5 6 9 11 13 3 4 7 3 4 7 3 4 7 3 4 7 3 4 7 3 4 6 9 10 3 4 7</p>
+<p>==================== Testcase: Uebergebener Wert ist leer ==================== Output: 1 3 5 6 9 11 12 3 4 7 3 4 7 3 4 7 3 4 7 3 4 7 3 4 6 9 10 3 4 7</p>
 </body>
 </html>
