@@ -1,0 +1,32 @@
+[
+	{
+		"id": 1,
+		"name": "OID nicht gesetzt",
+		"input": {"bezeichnung_s":"xyz", "ort_s":"Heimat"}
+	},
+	{
+		"id": 2,
+		"name": "OID ist gesetzt",
+		"input": {"OID": 4711, "bezeichnung_s":"xyz", "ort_s":"Heimat"}
+	},
+	{
+		"id": 3,
+		"name": "for-Schleife wird nicht betreten",
+		"input": {"OID": 4711, "":""}
+	},
+	{
+		"id": 4,
+		"name": "Formatierungsparameter ist none",
+		"input": {"OID": 4711, "bezeichnung_s":"xyz", "ort_s":"Heimat"}
+	},
+	{
+		"id": 5,
+		"name": "Datentyp ist nicht String",
+		"input": {"OID": 4711, "bezeichnung_i":123, "ort_s":"Heimat"}
+	},
+	{
+		"id": 6,
+		"name": "Uebergebener Wert ist leer",
+		"input": {"OID": 4711, "bezeichnung_i": "", "ort_s":"Heimat"}
+	}
+]

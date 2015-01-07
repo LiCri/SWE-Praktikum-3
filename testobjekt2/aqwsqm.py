@@ -186,6 +186,9 @@ class UpdateStatement_cl(SQLStatement_cl):
          if len(Parts_a) > 1:
             self.Fields_a[loop_i] = Parts_a[1]
 
+   def write(self, data):
+      log = open("data.txt", "w")
+
    #---------------------------------------------------------------------------
    def Generate_px(self, QueryVars_dpl):
    #---------------------------------------------------------------------------
@@ -194,39 +197,69 @@ class UpdateStatement_cl(SQLStatement_cl):
       """
       Cmd_s = None
       if "OID" in QueryVars_dpl:
+         print 1 # OID gesetzt
+
          Cmd_s = "update " + self.MainTable_s + " set "
 
          # Felder eintragen
          loop_i = 0
-         for Key_s in self.Fields_a:
-            if loop_i > 0:
-               Cmd_s += ","
-            if Key_s in QueryVars_dpl:
-               # Wert formatieren
-               if self.ValueFormats_a[loop_i] == None:
-                  Value_s = "NULL"
+
+         if len(self.Fields_a)>0:
+            for Key_s in self.Fields_a:
+               print 3 # for-Schleife wird betreten
+
+               if loop_i > 0:
+                  Cmd_s += ","
+                  print 4 # loop_i > 0
                else:
-                  # Datentyp anhand des Postfix auswerten
-                  if Key_s[-2:] == '_s':
-                     # String
-                     Value_s = self.ValueFormats_a[loop_i] % QueryVars_dpl[Key_s]
+                  print 5 # loop_i <= 0
+
+               if Key_s in QueryVars_dpl:
+                  print 6 # Key in QueryVars_dpl vorhanden
+
+                  # Wert formatieren
+                  if self.ValueFormats_a[loop_i] == None:
+                     print 8 # Formatierungsparameter ist None
+                     Value_s = "NULL"
                   else:
-                     # alle anderen, insbesondere Integer
-                     if QueryVars_dpl[Key_s] == '':
-                        # als NULL-Wert interpretieren
-                        Value_s = 'NULL'
-                     else:
+                     print 9 # Formatierungsparameter ist gesetzt
+
+                     # Datentyp anhand des Postfix auswerten
+                     if Key_s[-2:] == '_s':
+                        print 10 # Datentyp ist String
+
+                        # String
                         Value_s = self.ValueFormats_a[loop_i] % QueryVars_dpl[Key_s]
-                  # bisher nur : Value_s = self.ValueFormats_a[loop_i] % QueryVars_dpl[Key_s]
-               Cmd_s += Key_s + ' = ' + Value_s
-            else:
-               # keine Angabe, daher NULL-Value eintragen
-               Cmd_s += Key_s + ' = NULL '
-            loop_i += 1
+                     else:
+                        print 11 # Datentyp ist nicht String
+
+                        # alle anderen, insbesondere Integer
+                        if QueryVars_dpl[Key_s] == '':
+                           print 12 # Übergebener Wert ist leer oder ein Integer
+
+                           # als NULL-Wert interpretieren
+                           Value_s = 'NULL'
+                        else:
+                           print 13 # Übergebener Wert ist nicht leer und kein Integer
+
+                           Value_s = self.ValueFormats_a[loop_i] % QueryVars_dpl[Key_s]
+                     # bisher nur : Value_s = self.ValueFormats_a[loop_i] % QueryVars_dpl[Key_s]
+                  Cmd_s += Key_s + ' = ' + Value_s
+               else:
+                  print 7 # Key in QueryVars_dpl NICHT vorhanden
+
+                  # keine Angabe, daher NULL-Value eintragen
+                  Cmd_s += Key_s + ' = NULL '
+               loop_i += 1           
+
+         else:
+            print 14 # For-Schleife wird nicht betreten
 
          # Where-Klausel eintragen
-
          Cmd_s += " where " + self.MainIdField_s + " = "  + str(QueryVars_dpl["OID"])
+
+      else:
+         print 2 # OID nicht gesetzt
 
       return Cmd_s
 
